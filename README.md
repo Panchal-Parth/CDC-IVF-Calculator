@@ -47,14 +47,14 @@ Open your browser and go to http://localhost:8080 to access the IVF success rate
 
 ## Usage
 ### Input Fields
-Age: Enter the age of the person undergoing IVF.
-Weight: Enter the weight of the person (in pounds).
-Height: Enter the height in feet and inches.
-Egg Source: Select whether the egg source is "Donor Eggs" or "Own Eggs".
-IVF Cycles: Enter the number of IVF cycles attempted previously.
-Infertility Reason(s): Select one or more reasons for infertility, or choose "I don’t know/no reason".
-Prior Pregnancies: Enter the number of prior pregnancies.
-Prior Live Births: Enter the number of prior live births.
+* Age: Enter the age of the person undergoing IVF.
+* Weight: Enter the weight of the person (in pounds).
+* Height: Enter the height in feet and inches.
+* Egg Source: Select whether the egg source is "Donor Eggs" or "Own Eggs".
+* IVF Cycles: Enter the number of IVF cycles attempted previously.
+* Infertility Reason(s): Select one or more reasons for infertility, or choose "I don’t know/no reason".
+* Prior Pregnancies: Enter the number of prior pregnancies.
+* Prior Live Births: Enter the number of prior live births.
 
 ### Output
 After submitting the form, the application will display the calculated IVF success rate based on the entered data.
