@@ -111,7 +111,7 @@ def calculate_success_rate(inputs, formula_row):
         Decimal(formula_row[f'formula_{reason}_true_value']) if inputs[reason] else Decimal(0)
         for reason in ['tubal_factor', 'male_factor_infertility', 'endometriosis',
                        'ovulatory_disorder', 'diminished_ovarian_reserve', 'uterine_factor',
-                       'other', 'unexplained']
+                       'other', 'unexplained_infertility']
     ])
 
     prior_pregnancies = inputs['prior_pregnancies']
@@ -166,7 +166,7 @@ def calculate():
 
     reasons = ['tubal_factor', 'male_factor_infertility', 'endometriosis',
                'ovulatory_disorder', 'diminished_ovarian_reserve', 'uterine_factor',
-               'other', 'unexplained']
+               'other', 'unexplained_infertility']
 
     # Mapping the selected reasons to a dictionary
     reason_map = {reason: reason in data.getlist('reason') for reason in reasons}
