@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IVF Information Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        form {
+            width: 400px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+
+        .height-inputs {
+            display: flex;
+            gap: 10px;
+        }
+
+        .height-inputs input {
+            width: 48%;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>IVF Information Form</h1>
+    <form action="/calculate" method="POST">
+        <label for="age">How old are you? (age between 20 and 50)</label>
+        <input type="number" id="age" name="age" min="20" max="50" required>
+
+        <label for="weight">How much do you weigh? (80 – 300 lbs)</label>
+        <input type="number" id="weight" name="weight" min="80" max="300" required>
+
+        <label>How tall are you?</label>
+        <div class="height-inputs">
+            <input type="number" id="height_feet" name="height_feet" min="0" placeholder="Feet" required>
+            <input type="number" id="height_inches" name="height_inches" min="0" max="11" placeholder="Inches" required>
+        </div>
+
+        <label for="ivf_cycles">How many times have you used IVF in the past?</label>
+        <select id="ivf_cycles" name="ivf_cycles">
+            <option value="0">I’ve never used IVF</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3 or more</option>
+        </select>
+
+        <label for="prior_pregnancies">How many prior pregnancies have you had?</label>
+        <select id="prior_pregnancies" name="prior_pregnancies" onchange="handlePregnancyChange()">
+            <option value="0">None</option>
+            <option value="1">1</option>
+            <option value="2+">2 or more</option>
+        </select>
+
+        <div id="prior_births_section" class="hidden">
+            <label for="prior_births">How many prior births have you had?</label>
+            <select id="prior_births" name="prior_births">
+                <option value="0">None</option>
+                <option value="1">1</option>
+                <option value="2+">2 or more</option>
+            </select>
+        </div>
+
+        <label>What is the reason you are using IVF? (select all that apply)</label>
+        <input type="checkbox" name="reason" value="male_factor_infertility"> Male factor infertility<br>
+        <input type="checkbox" name="reason" value="endometriosis"> Endometriosis<br>
+        <input type="checkbox" name="reason" value="tubal_factor"> Tubal factor<br>
+        <input type="checkbox" name="reason" value="ovulatory_disorder"> Ovulatory disorder (including PCOS)<br>
+        <input type="checkbox" name="reason" value="diminished_ovarian_reserve"> Diminished ovarian reserve<br>
+        <input type="checkbox" name="reason" value="uterine_factor"> Uterine factor<br>
+        <input type="checkbox" name="reason" value="other"> Other reason<br>
+        <input type="checkbox" name="reason" value="unexplained"> Unexplained (Idiopathic) infertility<br>
+        <input type="checkbox" name="reason" value="no_reason"> I don’t know/no reason<br>
+
+        <label for="egg_source">Do you plan to use your own eggs or donor eggs?</label>
+        <select id="egg_source" name="egg_source">
+            <option value="own_eggs">My own eggs</option>
+            <option value="donor_eggs">Donor eggs</option>
+        </select>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        function handlePregnancyChange() {
+            const pregnancies = document.getElementById('prior_pregnancies').value;
+            const priorBirthsSection = document.getElementById('prior_births_section');
+            const priorBirthsSelect = document.getElementById('prior_births');
+
+            if (pregnancies === '0') {
+                priorBirthsSection.classList.add('hidden');
+                priorBirthsSelect.value = '0';
+            } else {
+                priorBirthsSection.classList.remove('hidden');
+
+                if (pregnancies === '1') {
+                    setOptions(priorBirthsSelect, ['0', '1']);
+                } else if (pregnancies === '2+') {
+                    setOptions(priorBirthsSelect, ['0', '1', '2+']);
+                }
+            }
+        }
+
+        function setOptions(selectElement, options) {
+            selectElement.innerHTML = '';
+            options.forEach(option => {
+                const opt = document.createElement('option');
+                opt.value = option;
+                opt.textContent = capitalize(option.replace('_', ' '));
+                selectElement.appendChild(opt);
+            });
+        }
+
+        function capitalize(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        }
+    </script>
+</body>
+
+</html>
