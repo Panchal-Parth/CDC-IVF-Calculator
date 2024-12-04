@@ -58,3 +58,6 @@ Prior Live Births: Enter the number of prior live births.
 
 ### Output
 After submitting the form, the application will display the calculated IVF success rate based on the entered data.
+
+# License
+This project is licensed under the MIT License 
